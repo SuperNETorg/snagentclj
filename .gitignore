@@ -9,3 +9,5 @@ classes/
 classes/*
 bin/*
 target/
+resources/*
+!resources/**/info
