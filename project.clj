@@ -8,5 +8,6 @@
     [net.java.dev.jna/jna "4.1.0"]
     [net.java.dev.jna/jna-platform "4.1.0"]
     [com.googlecode.json-simple/json-simple "1.1.1"]
-    [org.bouncycastle/bcprov-jdk15on "1.51"]]
+    [org.bouncycastle/bcprov-jdk15on "1.51"]
+    [org.clojure/tools.nrepl "0.2.3"]]
   :main "echodemo.app")
