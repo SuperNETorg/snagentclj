@@ -1,4 +1,5 @@
 #!/bin/sh
-DIR="$( dirname $0 )"
-cd $DIR
-lein run "$@"
+DIR="$( pwd )"
+BASEDIR="$( dirname $0 )"
+cd $BASEDIR
+lein run $DIR $@
