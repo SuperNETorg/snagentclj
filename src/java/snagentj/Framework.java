@@ -70,9 +70,10 @@ public class Framework
   {
     try
     {
-      info.permanentflag = Convert.parseUnsignedLong(args[0]) == 1L;
-      info.daemonid = Convert.parseUnsignedLong(args[1]);
-      info.ppid = (long) Convert.parseUnsignedLong(args[3]);
+      String runPath = args[0];
+      info.permanentflag = Convert.parseUnsignedLong(args[1]) == 1L;
+      info.daemonid = Convert.parseUnsignedLong(args[2]);
+      info.ppid = (long) Convert.parseUnsignedLong(args[4]);
       info.name = agent.getName();
       info.numsent = 0L;
       info.numrecv = 0L;
@@ -87,8 +88,7 @@ public class Framework
       JSONParser parser = new JSONParser();
       
       ///HACK: params come as json array inside quotes - not so easy to parse
-      String tmp = (String) parser.parse(args[2]);
-      //JSONArray allParams = (JSONArray) parser.parse(args[2]);
+      String tmp = (String) parser.parse(args[3]);
       JSONObject params = (JSONObject) parser.parse(tmp);
       
       String nxtbits = Convert.emptyToNull((String) params.get("NXT"));
@@ -109,8 +109,8 @@ public class Framework
 
       System.out.println("Parent PID is " + info.ppid);
 
-      info.connectaddr = "ipc://SuperNET";
-      info.bindaddr = "ipc://" + info.daemonid;
+      info.connectaddr = "ipc://" + runPath  + "/SuperNET.agents";
+      info.bindaddr = "ipc://" + runPath + "/" + info.daemonid;
       /*if(info.permanentflag)
       {
         ///TODO: make port detection

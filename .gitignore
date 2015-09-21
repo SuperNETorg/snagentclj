@@ -8,3 +8,7 @@ classes/
 *.exp
 classes/*
 bin/*
+target/
+resources/*
+!resources/**/info
+*.so

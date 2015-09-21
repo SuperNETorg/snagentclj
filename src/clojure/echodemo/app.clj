@@ -21,16 +21,15 @@
 
   ;; process incoming request. process JSON, return JSON
   (agent-process-request [x info request]
-    (let [error (get request "error")
-          result (get request "result")
-          method (get request "method")]
-      (if (or (some? result) (some? error))
-        {"result" "completed"}
-        (if (some? method)
-          (if (= method "echo")
-            {"result" (get request "echostr")}
-            nil)
-          (do (println "request (" request ") has not method") nil)))))
+    (let [{error "error" result "result" method "method"} request]
+      (println "request (" request ")")
+      (cond
+        (= result "registered") {"result" "activated"}
+        (some? error)  {"result" "completed"}
+        (some? result)  {"result" "completed"}
+        (nil? method)  (do (println "request (" request ") has not method") nil)
+        (= method "echo") {"result" (get request "echostr")}
+        :else nil)))
 )
 
 (defn -main
